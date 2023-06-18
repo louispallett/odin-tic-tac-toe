@@ -2,7 +2,7 @@
 
 const gameBoard = (() => {
     const gameBoard = []
-    const gridContainer = document.querySelector(".grid-container");
+    const gridContainer = document.querySelector(".game-container");
     const createBoard = () => {
         for(let i = 0; i < 9; i++) {
         let gridItem = document.createElement("div");
