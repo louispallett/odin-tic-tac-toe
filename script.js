@@ -6,9 +6,10 @@ const gameBoard = (() => {
     const createBoard = () => {
         for(let i = 0; i < 9; i++) {
         let gridItem = document.createElement("div");
+        gridItem.onclick = function() {play([i])};
         gameBoard.push(gridItem);
         console.log(gameBoard);
-        gridContainer.appendChild(gameBoard[i])
+        gridContainer.appendChild(gameBoard[i]);
         }
     }    
     return {createBoard}
@@ -16,7 +17,10 @@ const gameBoard = (() => {
 
 gameBoard.createBoard();
 
-
+//This will change!
+function play(item) {
+    console.log(`You clicked box ${item}`);
+} 
 
 const player = (name, marker) => {
     const capitalize = () => name.toUpperCase();
