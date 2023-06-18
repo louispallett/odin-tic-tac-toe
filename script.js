@@ -6,9 +6,11 @@ const gameBoard = (() => {
     const createBoard = () => {
         for(let i = 0; i < 9; i++) {
         let gridItem = document.createElement("div");
-        gridContainer.appendChild(gridItem);
-    }
-    }
+        gameBoard.push(gridItem);
+        console.log(gameBoard);
+        gridContainer.appendChild(gameBoard[i])
+        }
+    }    
     return {createBoard}
 })();
 
