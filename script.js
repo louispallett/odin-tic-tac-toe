@@ -1,5 +1,6 @@
 //Tic Tac Toe instructions: https://www.theodinproject.com/lessons/node-path-javascript-tic-tac-toe
 
+
 const gameBoard = (() => {
     const gameBoard = [];
     const gridContainer = document.querySelector(".game-container");
@@ -12,23 +13,39 @@ const gameBoard = (() => {
         gridContainer.appendChild(gameBoard[i]);
         }
     }    
-    return {createBoard}
+    
+    const play = ((item, box) => {
+        const timesRun = [];
+        //Conditional ensures player cannot overwrite a node
+        if(box.textContent === "") {
+            let div = document.createElement("div");
+            div.appendChild(document.createTextNode(player1.marker));
+            box.appendChild(div);
+            console.log(`You clicked box ${item}`);
+            timesRun.push(null);
+        } else {
+            console.log("Nope!");
+        }   
+        return {timesRun}
+    })
+    return {createBoard, play}
 })();
 
 gameBoard.createBoard();
 
 //This will change!
-function play(item, box) {
+/* function play(item, box) {
     //Conditional ensures player cannot overwrite a node
     if(box.textContent === "") {
         let div = document.createElement("div");
         div.appendChild(document.createTextNode(player1.marker));
         box.appendChild(div);
         console.log(`You clicked box ${item}`);
+        timesRun.push(null);
     } else {
         console.log("Nope!");
     }    
-} 
+}  */
 
 const player = (name, marker) => {
     const capitalize = () => name.toUpperCase();
@@ -36,5 +53,8 @@ const player = (name, marker) => {
     return {sayName, marker};
 }
 
-const player1 = player("Louis", "O");
+const player1 = player("Louis", "X");
 player1.sayName();
+
+const player2 = player("Rhianna", "O");
+player2.sayName();
