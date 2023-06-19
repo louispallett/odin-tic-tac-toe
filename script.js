@@ -1,7 +1,7 @@
 //Tic Tac Toe instructions: https://www.theodinproject.com/lessons/node-path-javascript-tic-tac-toe
 
-
 const gameBoard = (() => {
+    const timesRun = [];
     const gameBoard = [];
     const gridContainer = document.querySelector(".game-container");
     const createBoard = () => {
@@ -13,20 +13,24 @@ const gameBoard = (() => {
         gridContainer.appendChild(gameBoard[i]);
         }
     }    
-    
+
     const play = ((item, box) => {
-        const timesRun = [];
         //Conditional ensures player cannot overwrite a node
         if(box.textContent === "") {
-            let div = document.createElement("div");
-            div.appendChild(document.createTextNode(player1.marker));
-            box.appendChild(div);
-            console.log(`You clicked box ${item}`);
             timesRun.push(null);
+            let div = document.createElement("div");
+            console.log(`You clicked box ${item}`);
+            if(timesRun.length % 2 == 0) {
+                div.appendChild(document.createTextNode(player2.marker));
+                box.appendChild(div);
+            } else {
+                div.appendChild(document.createTextNode(player1.marker));
+                box.appendChild(div);
+            }
+            console.log(timesRun.length);
         } else {
             console.log("Nope!");
         }   
-        return {timesRun}
     })
     return {createBoard, play}
 })();
