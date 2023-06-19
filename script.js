@@ -1,8 +1,8 @@
 //Tic Tac Toe instructions: https://www.theodinproject.com/lessons/node-path-javascript-tic-tac-toe
 
 const gameBoard = (() => {
-    const timesRun = [];
     const gameBoard = [];
+
     const gridContainer = document.querySelector(".game-container");
     const createBoard = () => {
         for(let i = 0; i < 9; i++) {
@@ -14,12 +14,14 @@ const gameBoard = (() => {
         }
     }    
 
+    const timesRun = []; //In order to stop the play() create a new array each time, this needs to be outside the function
+
     const play = ((item, box) => {
         //Conditional ensures player cannot overwrite a node
         if(box.textContent === "") {
             timesRun.push(null);
             let div = document.createElement("div");
-            console.log(`You clicked box ${item}`);
+            //console.log(`You clicked box ${item}`);
             if(timesRun.length % 2 == 0) {
                 div.appendChild(document.createTextNode(player2.marker));
                 box.appendChild(div);
@@ -27,9 +29,9 @@ const gameBoard = (() => {
                 div.appendChild(document.createTextNode(player1.marker));
                 box.appendChild(div);
             }
-            console.log(timesRun.length);
+            //console.log(timesRun.length);
         } else {
-            console.log("Nope!");
+            //console.log("Nope!");
         }   
     })
     return {createBoard, play}
