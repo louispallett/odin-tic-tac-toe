@@ -19,10 +19,15 @@ gameBoard.createBoard();
 
 //This will change!
 function play(item, box) {
-    let div = document.createElement("div");
-    div.appendChild(document.createTextNode(player1.marker));
-    box.appendChild(div);
-    console.log(`You clicked box ${item}`);
+    //Conditional ensures player cannot overwrite a node
+    if(box.textContent === "") {
+        let div = document.createElement("div");
+        div.appendChild(document.createTextNode(player1.marker));
+        box.appendChild(div);
+        console.log(`You clicked box ${item}`);
+    } else {
+        console.log("Nope!");
+    }    
 } 
 
 const player = (name, marker) => {
