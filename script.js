@@ -19,7 +19,9 @@ gameBoard.createBoard();
 
 //This will change!
 function play(item, box) {
-    box.innerHTML = `<div>${player1.marker}</div>`
+    let div = document.createElement("div");
+    div.appendChild(document.createTextNode(player1.marker));
+    box.appendChild(div);
     console.log(`You clicked box ${item}`);
 } 
 
@@ -29,5 +31,5 @@ const player = (name, marker) => {
     return {sayName, marker};
 }
 
-const player1 = player("Louis", "X");
+const player1 = player("Louis", "O");
 player1.sayName();
