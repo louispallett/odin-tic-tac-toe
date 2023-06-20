@@ -8,6 +8,7 @@ const gameBoard = (() => {
         for(let i = 0; i < 9; i++) {
         let gridItem = document.createElement("div");
         gridItem.onclick = function() {play([i], this)};
+        gridItem.classList.add(`item-${i}`);
         gameBoard.push(gridItem);
         console.log(gameBoard);
         gridContainer.appendChild(gameBoard[i]);
@@ -21,37 +22,26 @@ const gameBoard = (() => {
         if(box.textContent === "") {
             timesRun.push(null);
             let div = document.createElement("div");
-            //console.log(`You clicked box ${item}`);
+            console.log(`You clicked box ${item}`); //Remove later
             if(timesRun.length % 2 == 0) {
                 div.appendChild(document.createTextNode(player2.marker));
                 box.appendChild(div);
-            } else {
+            } else { 
                 div.appendChild(document.createTextNode(player1.marker));
                 box.appendChild(div);
             }
             //console.log(timesRun.length);
-        } else {
-            //console.log("Nope!");
+        } else { //Remove later
+            console.log("Nope!");
         }   
     })
     return {createBoard, play}
 })();
 
-gameBoard.createBoard();
-
-//This will change!
-/* function play(item, box) {
-    //Conditional ensures player cannot overwrite a node
-    if(box.textContent === "") {
-        let div = document.createElement("div");
-        div.appendChild(document.createTextNode(player1.marker));
-        box.appendChild(div);
-        console.log(`You clicked box ${item}`);
-        timesRun.push(null);
-    } else {
-        console.log("Nope!");
-    }    
-}  */
+function play() {
+    document.querySelector(".play-btn").style.display = "none";
+    gameBoard.createBoard();
+}
 
 const player = (name, marker) => {
     const capitalize = () => name.toUpperCase();

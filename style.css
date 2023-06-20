@@ -14,6 +14,28 @@ body {
     grid-template-rows: 1fr 3fr;
 }
 
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.play-btn {
+    background-color: rgb(27, 209, 42);
+    padding: 10px 50px;
+    border-radius: 10px;
+    font-size: 1.5rem;
+    display: block;
+    position: relative;
+    left: 25%;
+    bottom: 50%;
+}
+
+.play-btn:hover {
+    background-color: rgba(27, 209, 42, 0.548);
+    cursor: pointer;
+}
+
 .top {
     font-size: 4rem;
     font-weight: bold;
