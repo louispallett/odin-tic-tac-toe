@@ -70,6 +70,6 @@ body {
 }
 
 .winning-combination {
-    background-color: rgba(0, 255, 21, 0.548);
+    background-color: rgb(33, 151, 43);
     transition: 1s;
 }

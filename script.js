@@ -30,6 +30,9 @@ const gameBoard = (() => {
                 gameBoardArr[a].textContent === gameBoardArr[b].textContent &&
                 gameBoardArr[a].textContent === gameBoardArr[c].textContent
             ) {
+                gameBoardArr[a].classList.add("winning-combination");
+                gameBoardArr[b].classList.add("winning-combination");
+                gameBoardArr[c].classList.add("winning-combination");
                 return "x-true";
             } else if(
                 gameBoardArr[a].textContent !== "" &&
@@ -37,10 +40,12 @@ const gameBoard = (() => {
                 gameBoardArr[a].textContent === gameBoardArr[b].textContent &&
                 gameBoardArr[a].textContent === gameBoardArr[c].textContent
             ) {
+                gameBoardArr[a].classList.add("winning-combination");
+                gameBoardArr[b].classList.add("winning-combination");
+                gameBoardArr[c].classList.add("winning-combination");
                 return "o-true";                
             }
         }
-
         return false;
     }
 
@@ -62,12 +67,25 @@ const gameBoard = (() => {
             //console.log(timesRun.length);
         } else { //Remove later
             console.log("Nope!");
-        }   
+        }  
+        
+        //When player wins, stop player from selecting
+        function stopPlay() {
+            gameBoard.gameBoardArr.forEach((gridItem) => {
+                gridItem.onclick = null;
+            });
+        }
 
+        //Return when checkWinner() is true
         if (gameBoard.checkWinner() === "x-true") {
             console.log("X wins!");
+            stopPlay();
+
         } else if (gameBoard.checkWinner() === "o-true") {
-            console.log("O wins!")
+            console.log("O wins!");
+            stopPlay();
+        } else if (timesRun.length === 9) {
+            console.log("Tie!");
         }
     })
 
