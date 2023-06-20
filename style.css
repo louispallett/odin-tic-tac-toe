@@ -20,20 +20,33 @@ body {
     align-items: center;
 }
 
+.play-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 20px;
+    position: fixed;
+    top: 300px
+}
+
 .play-btn {
     background-color: rgb(27, 209, 42);
-    padding: 10px 50px;
     border-radius: 10px;
     font-size: 1.5rem;
-    display: block;
-    position: relative;
-    left: 2.5%;
-    bottom: 50%;
+    padding: 5px 20px;
 }
 
 .play-btn:hover {
     background-color: rgba(27, 209, 42, 0.548);
     cursor: pointer;
+}
+
+input {
+    border: 2px solid white;
+    background: none;
+    font-size: 1rem;
+    border-radius: 5px;
 }
 
 .top {

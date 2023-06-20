@@ -1,5 +1,6 @@
 //Tic Tac Toe instructions: https://www.theodinproject.com/lessons/node-path-javascript-tic-tac-toe
-
+const player1Name = document.getElementById("player1Name");
+const player2Name = document.getElementById("player2Name");
 
 const gameBoard = (() => {
     const gameBoardArr = [];
@@ -78,11 +79,11 @@ const gameBoard = (() => {
 
         //Return when checkWinner() is true
         if (gameBoard.checkWinner() === "x-true") {
-            console.log("X wins!");
+            console.log(`${player1.name} wins!`);
             stopPlay();
 
         } else if (gameBoard.checkWinner() === "o-true") {
-            console.log("O wins!");
+            console.log(`${player2.name} wins!`);
             stopPlay();
         } else if (timesRun.length === 9) {
             console.log("Tie!");
@@ -93,18 +94,17 @@ const gameBoard = (() => {
 })();
 
 function play() {
-    document.querySelector(".play-btn").style.display = "none";
+    document.querySelector(".play-container").style.display = "none";
     gameBoard.createBoard();
 }
 
 const player = (name, marker) => {
     const capitalize = () => name.toUpperCase();
     const sayName = () => console.log(`${capitalize()} is playing as '${marker}'!`);
-    return {sayName, marker};
+    return {name, sayName, marker};
 }
 
 const player1 = player("Louis", "X");
-player1.sayName();
-
 const player2 = player("Rhianna", "O");
+player1.sayName();
 player2.sayName();
