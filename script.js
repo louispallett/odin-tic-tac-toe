@@ -1,17 +1,17 @@
 //Tic Tac Toe instructions: https://www.theodinproject.com/lessons/node-path-javascript-tic-tac-toe
 
-const gameBoard = (() => {
-    const gameBoard = [];
 
+const gameBoard = (() => {
+    const gameBoardArr = [];
     const gridContainer = document.querySelector(".game-container");
     const createBoard = () => {
         for(let i = 0; i < 9; i++) {
         let gridItem = document.createElement("div");
         gridItem.onclick = function() {play([i], this)};
         gridItem.classList.add(`item-${i}`);
-        gameBoard.push(gridItem);
-        console.log(gameBoard);
-        gridContainer.appendChild(gameBoard[i]);
+        gameBoardArr.push(gridItem);
+        console.log(gameBoardArr);
+        gridContainer.appendChild(gameBoardArr[i]);
         }
     }    
 
@@ -35,7 +35,7 @@ const gameBoard = (() => {
             console.log("Nope!");
         }   
     })
-    return {createBoard, play}
+    return {gameBoardArr, createBoard, play, timesRun}
 })();
 
 function play() {
@@ -54,3 +54,26 @@ player1.sayName();
 
 const player2 = player("Rhianna", "O");
 player2.sayName();
+
+// The logic of winning is as follows:
+
+// Combinations:
+
+// 0 1 2
+// 3 4 5
+// 6 7 8
+
+// 0 3 6
+// 1 4 7
+// 2 5 8
+
+// 0 4 8
+// 2 4 6
+
+// const winner = ((p1, p2, p3) => {
+//     function checkwin() {
+//         console.log("Huh");
+//     }
+//     const newItem = gameBoard.gameBoardArr;
+//     return {newItem, checkwin}
+// })();
