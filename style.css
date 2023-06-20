@@ -68,3 +68,8 @@ body {
 .game-container > div:hover {
     background-color: rgba(0, 255, 21, 0.548);
 }
+
+.winning-combination {
+    background-color: rgba(0, 255, 21, 0.548);
+    transition: 1s;
+}
