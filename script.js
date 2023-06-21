@@ -1,14 +1,17 @@
 //Tic Tac Toe instructions: https://www.theodinproject.com/lessons/node-path-javascript-tic-tac-toe
-const player1Name = document.getElementById("player1Name");
-const player2Name = document.getElementById("player2Name");
+let player1;
+let player2;
 
 const gameBoard = (() => {
     const gameBoardArr = [];
     const gridContainer = document.querySelector(".game-container");
+
     const createBoard = () => {
         for(let i = 0; i < 9; i++) {
         let gridItem = document.createElement("div");
         gridItem.onclick = function() {play([i], this)};
+
+
         gridItem.classList.add(`item-${i}`);
         gameBoardArr.push(gridItem);
         console.log(gameBoardArr);
@@ -52,20 +55,21 @@ const gameBoard = (() => {
 
     const timesRun = []; //In order to stop the play() create a new array each time, this needs to be outside the function
 
-    const play = ((item, box) => {
+    const play = (item, box) => {
         //Conditional ensures player cannot overwrite a node
         if(box.textContent === "") {
             timesRun.push(null);
             let div = document.createElement("div");
-            console.log(`You clicked box ${item}`); //Remove later
+            
             if(timesRun.length % 2 == 0) {
                 div.appendChild(document.createTextNode(player2.marker));
                 box.appendChild(div);
+                console.log(`${player2.name} clicked box ${item}`); //Remove later
             } else { 
                 div.appendChild(document.createTextNode(player1.marker));
                 box.appendChild(div);
+                console.log(`${player1.name} clicked box ${item}`); //Remove later
             }
-            //console.log(timesRun.length);
         } else { //Remove later
             console.log("Nope!");
         }  
@@ -77,34 +81,46 @@ const gameBoard = (() => {
             });
         }
 
+        const body = document.querySelector(".body");
         //Return when checkWinner() is true
         if (gameBoard.checkWinner() === "x-true") {
+            const winnerBox = document.createElement("div");
+            winnerBox.classList.add("winnerBox");
+            winnerBox.appendChild(document.createTextNode(`${player1.name} wins!`));
+            body.appendChild(winnerBox);
             console.log(`${player1.name} wins!`);
             stopPlay();
-
         } else if (gameBoard.checkWinner() === "o-true") {
+            const winnerBox = document.createElement("div");
+            winnerBox.classList.add("winnerBox");
+            winnerBox.appendChild(document.createTextNode(`${player2.name} wins!`));
+            body.appendChild(winnerBox);
             console.log(`${player2.name} wins!`);
             stopPlay();
+
         } else if (timesRun.length === 9) {
             console.log("Tie!");
         }
-    })
+    };
 
     return {gameBoardArr, createBoard, play, timesRun, checkWinner}
 })();
 
 function play() {
+    const player1Name = document.getElementById("player1Name").value;
+    const player2Name = document.getElementById("player2Name").value;
+
+    player1 = createPlayer(player1Name, "X");
+    player2 = createPlayer(player2Name, "O");
+    player1.sayName();
+    player2.sayName();
+
     document.querySelector(".play-container").style.display = "none";
     gameBoard.createBoard();
 }
 
-const player = (name, marker) => {
+const createPlayer = (name, marker) => {
     const capitalize = () => name.toUpperCase();
     const sayName = () => console.log(`${capitalize()} is playing as '${marker}'!`);
     return {name, sayName, marker};
-}
-
-const player1 = player("Louis", "X");
-const player2 = player("Rhianna", "O");
-player1.sayName();
-player2.sayName();
+};
