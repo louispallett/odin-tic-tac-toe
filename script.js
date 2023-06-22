@@ -81,27 +81,34 @@ const gameBoard = (() => {
             });
         }
 
+
         const body = document.querySelector(".body");
         //Return when checkWinner() is true
         if (gameBoard.checkWinner() === "x-true") {
-            const winnerBox = document.createElement("div");
-            winnerBox.classList.add("result");
-            winnerBox.appendChild(document.createTextNode(`${player1.name} wins!`));
-            body.appendChild(winnerBox);
             console.log(`${player1.name} wins!`);
+            resultAnounceWin(player1.name);
             stopPlay();
         } else if (gameBoard.checkWinner() === "o-true") {
-            const winnerBox = document.createElement("div");
-            winnerBox.classList.add("result");
-            winnerBox.appendChild(document.createTextNode(`${player2.name} wins!`));
-            body.appendChild(winnerBox);
             console.log(`${player2.name} wins!`);
+            resultAnounceWin(player2.name);
             stopPlay();
-
         } else if (timesRun.length === 9) {
             console.log("Tie!");
+            resultAnounceTie();
+            stopPlay();
         }
     };
+
+    const resultBox = document.querySelector(".result");
+    const resultAnounceWin = (winningPlayer) => {
+        resultBox.textContent = `${winningPlayer} wins!`;
+        resultBox.style.display = "flex";
+    };
+
+    const resultAnounceTie = () => {
+        resultBox.textContent = "It's a tie!";
+        resultBox.style.display = "flex";
+    }
 
     return {gameBoardArr, createBoard, play, timesRun, checkWinner}
 })();
