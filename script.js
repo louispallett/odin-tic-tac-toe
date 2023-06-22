@@ -70,9 +70,7 @@ const gameBoard = (() => {
                 box.appendChild(div);
                 console.log(`${player1.name} clicked box ${item}`); //Remove later
             }
-        } else { //Remove later
-            console.log("Nope!");
-        }  
+        }
         
         //When player wins, stop player from selecting
         function stopPlay() {
@@ -81,8 +79,6 @@ const gameBoard = (() => {
             });
         }
 
-
-        const body = document.querySelector(".body");
         //Return when checkWinner() is true
         if (gameBoard.checkWinner() === "x-true") {
             console.log(`${player1.name} wins!`);
@@ -119,15 +115,11 @@ function play() {
 
     player1 = createPlayer(player1Name, "X");
     player2 = createPlayer(player2Name, "O");
-    player1.sayName();
-    player2.sayName();
 
     document.querySelector(".play-container").style.display = "none";
     gameBoard.createBoard();
 }
 
 const createPlayer = (name, marker) => {
-    const capitalize = () => name.toUpperCase();
-    const sayName = () => console.log(`${capitalize()} is playing as '${marker}'!`);
-    return {name, sayName, marker};
+    return {name, marker};
 };
