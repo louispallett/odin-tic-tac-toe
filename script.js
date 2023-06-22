@@ -85,14 +85,14 @@ const gameBoard = (() => {
         //Return when checkWinner() is true
         if (gameBoard.checkWinner() === "x-true") {
             const winnerBox = document.createElement("div");
-            winnerBox.classList.add("winnerBox");
+            winnerBox.classList.add("result");
             winnerBox.appendChild(document.createTextNode(`${player1.name} wins!`));
             body.appendChild(winnerBox);
             console.log(`${player1.name} wins!`);
             stopPlay();
         } else if (gameBoard.checkWinner() === "o-true") {
             const winnerBox = document.createElement("div");
-            winnerBox.classList.add("winnerBox");
+            winnerBox.classList.add("result");
             winnerBox.appendChild(document.createTextNode(`${player2.name} wins!`));
             body.appendChild(winnerBox);
             console.log(`${player2.name} wins!`);
