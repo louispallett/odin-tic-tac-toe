@@ -104,6 +104,9 @@ const gameBoard = (() => {
     const resultAnounceTie = () => {
         resultBox.textContent = "It's a tie!";
         resultBox.style.display = "flex";
+        gameBoard.gameBoardArr.forEach((gridItem) => {
+            gridItem.style.background = "black";
+        })
     }
 
     const restart = () => {
@@ -115,7 +118,7 @@ const gameBoard = (() => {
             gridItem.style.background = "none";
         });
         gameBoard.timesRun.length = 0;
-        
+        resultBox.style.display = "none";
         console.log("This")
     }
 
