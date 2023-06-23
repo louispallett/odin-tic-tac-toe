@@ -49,6 +49,11 @@ const gameBoard = (() => {
                 gameBoardArr[c].classList.add("winning-combination");
                 return "o-true";                
             }
+            // const resetBackground = () => {
+            //     gameBoardArr[a].classList.remove("winning-combination");
+            //     gameBoardArr[b].classList.remove("winning-combination");
+            //     gameBoardArr[c].classList.remove("winning-combination");
+            // }
         }
         return false;
     }
@@ -114,6 +119,7 @@ const gameBoard = (() => {
             gridItem.innerHTML = "";
             for(let i = 0; i < 9; i++) {
                 gridItem.onclick = function() {play([i], this)};
+                gridItem.classList.add(`item-${i}`);
             }
             gridItem.style.background = "none";
         });
