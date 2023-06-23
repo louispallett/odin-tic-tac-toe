@@ -100,15 +100,18 @@ const gameBoard = (() => {
         }
     };
 
+    const playAgain = document.querySelector(".playAgain")
     const resultBox = document.querySelector(".result");
     const resultAnounceWin = (winningPlayer) => {
         resultBox.textContent = `${winningPlayer} wins!`;
         resultBox.style.display = "flex";
+        playAgain.style.display = "block";
     };
 
     const resultAnounceTie = () => {
         resultBox.textContent = "It's a tie!";
         resultBox.style.display = "flex";
+        playAgain.style.display = "block";
         gameBoard.gameBoardArr.forEach((gridItem) => {
             gridItem.style.background = "black";
         })
@@ -125,7 +128,7 @@ const gameBoard = (() => {
         });
         gameBoard.timesRun.length = 0;
         resultBox.style.display = "none";
-        console.log("This")
+        playAgain.style.display = "none";
     }
 
     return {gameBoardArr, createBoard, play, timesRun, checkWinner, restart}

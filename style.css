@@ -38,7 +38,8 @@ body {
     padding: 5px 20px;
 }
 
-.play-btn:hover {
+.play-btn:hover,
+.playAgain:hover {
     background-color: rgba(27, 209, 42, 0.548);
     cursor: pointer;
 }
@@ -98,7 +99,20 @@ input {
     border-radius: 5px;
     font-size: 2.5rem;
     color: black;
-    background-color: rgba(216, 216, 216, 0.733);
+    background-color: rgba(27, 209, 42);
     justify-content: center;
     align-items: center;
+}
+
+.playAgain {
+    display: none; 
+    position: absolute;
+    padding: 10px;
+    background-color: rgb(27, 209, 42);
+    border-radius: 10px;
+    border: 3px solid white;
+    font-size: 1.5rem;
+    left: 50%;
+    top: 75%;
+    transform: translate(-50%, -75%);
 }
