@@ -5,7 +5,7 @@ const gameBoard = (() => {
     const createBoard = () => {
         for(let i = 0; i < 9; i++) {
             let gridItem = document.createElement("div");
-            gridItem.onclick = function() {play.play([i]), this};
+            gridItem.onclick = function() {play.play([i], this)};
             gridItem.classList.add(`item-${i}`);
             gameBoardArr.push(gridItem);
             gridContainer.appendChild(gameBoardArr[i]);
@@ -30,27 +30,24 @@ const play = (() => {
 
     const play = (item, box) => {
         //Conditional ensures player cannot overwrite a node
-        // if(box.textContent === "") {
-        //     timesRun.push(null);
-        //     let div = document.createElement("div");
+        if(box.textContent === "") {
+            timesRun.push(null);
+            let div = document.createElement("div");
             
-        //     if(timesRun.length % 2 == 0) {
-        //         div.appendChild(document.createTextNode(player2.marker));
-        //         box.appendChild(div);
-        //         console.log(`${player2.name} clicked box ${item}`); //Remove later
-        //     } else { 
-        //         div.appendChild(document.createTextNode(player1.marker));
-        //         box.appendChild(div);
-        //         console.log(`${player1.name} clicked box ${item}`); //Remove later
-        //     }
-        // }
-        console.log(this);
+            if(timesRun.length % 2 == 0) {
+                div.appendChild(document.createTextNode(player2.marker));
+                box.appendChild(div);
+                console.log(`${player2.name} clicked box ${item}`); //Remove later
+            } else { 
+                div.appendChild(document.createTextNode(player1.marker));
+                box.appendChild(div);
+                console.log(`${player1.name} clicked box ${item}`); //Remove later
+            }
+        }
     }
 
     return{startPlay, play}
 })();
-
-
 
 const createPlayer = (name, marker) => {
     return {name, marker};
