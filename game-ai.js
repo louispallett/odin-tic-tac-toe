@@ -43,9 +43,10 @@ const play = (() => {
                 box.appendChild(div);
                 console.log(`${player1.name} clicked box ${item}`); //Remove later
             }
+            winner.checkWinner();
         }
     }
-    return{startPlay, play}
+    return{startPlay, play, timesRun}
 })();
 
 const winner = (() => {
@@ -68,7 +69,7 @@ const winner = (() => {
                 gameBoard.gameBoardArr[a].classList.add("winning-combination");
                 gameBoard.gameBoardArr[b].classList.add("winning-combination");
                 gameBoard.gameBoardArr[c].classList.add("winning-combination");
-                return "x-true";
+                return result.returnResult("x-true"); 
             } else if(
                 gameBoard.gameBoardArr[a].textContent !== "" &&
                 gameBoard.gameBoardArr[a].textContent === "O" &&
@@ -78,30 +79,49 @@ const winner = (() => {
                 gameBoard.gameBoardArr[a].classList.add("winning-combination");
                 gameBoard.gameBoardArr[b].classList.add("winning-combination");
                 gameBoard.gameBoardArr[c].classList.add("winning-combination");
-                return "o-true";                
+                return result.returnResult("o-true");                
             }
         }
         return false;
     }
 
-    const result = () => {
-        //Return when checkWinner() is true
-        if (checkWinner() === "x-true") {
+    // const result = (winStatus) => {
+    //     if(winStatus === "x-true") {
+    //         console.log(`${player1.name} wins!`);
+    //         // resultAnounceWin(player1.name);
+    //         // stopPlay();
+    //     } else if (winStatus === "o-true") {
+    //         console.log(`${player2.name} wins!`);
+    //         // resultAnounceWin(player1.name);
+    //         // stopPlay();
+    //     } else if (play.timesRun.length === 9) {
+    //         console.log("Tie!");
+    //         // resultAnounceWin(player1.name);
+    //         // stopPlay();
+    //     }
+    // }
+    return{checkWinner}
+})();
+
+const result = (() => {
+    
+    const returnResult = (winStatus) => {
+        if(winStatus === "x-true") {
             console.log(`${player1.name} wins!`);
             // resultAnounceWin(player1.name);
             // stopPlay();
-        } else if (checkWinner() === "o-true") {
+        } else if (winStatus === "o-true") {
             console.log(`${player2.name} wins!`);
-            // resultAnounceWin(player2.name);
+            // resultAnounceWin(player1.name);
             // stopPlay();
-        } else if (timesRun.length === 9) {
+        } else if (play.timesRun.length === 9) {
             console.log("Tie!");
-            // resultAnounceTie();
+            // resultAnounceWin(player1.name);
             // stopPlay();
         }
     }
 
-    return{checkWinner, result}
+    return{returnResult}
 })();
 
 const createPlayer = (name, marker) => {
