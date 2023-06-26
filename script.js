@@ -24,7 +24,7 @@ const gameBoard = (() => {
 
 const play = (() => {
 
-    const startPlay = () => {
+    const twoPlayerPlay = () => {
         const player1Name = document.getElementById("player1Name").value;
         const player2Name = document.getElementById("player2Name").value;
         player1 = createPlayer(player1Name, "X");
@@ -32,6 +32,14 @@ const play = (() => {
         document.querySelector(".play-container").style.display = "none";
         gameBoard.createBoard();
     };
+
+    const onePlayerPlay = () => {
+        const playerName = document.getElementById("playerName").value;
+        player1 = createPlayer("The Computer", "X");
+        player2 = createPlayer(playerName, "O");
+        document.querySelector(".play-container").style.display = "none";
+        gameBoard.createBoard();
+    }
 
     const timesRun = [];
 
@@ -51,7 +59,7 @@ const play = (() => {
             winner.checkWinner();
         }
     }
-    return{startPlay, play, timesRun}
+    return{onePlayerPlay, twoPlayerPlay, play, timesRun}
 })();
 
 const winner = (() => {
