@@ -62,6 +62,10 @@ const winner = (() => {
             [0, 4, 8], [2, 4, 6] //Diagon Alley!
         ];
 
+        const colourWin = (indices) => {
+            indices.forEach(index => {gameBoard.gameBoardArr[index].setAttribute("id", "winning-combination");});
+        };
+
         for(const combination of winningCombinations) {
             const [a, b, c] = combination;
             if (
@@ -70,9 +74,8 @@ const winner = (() => {
                 gameBoard.gameBoardArr[a].textContent === gameBoard.gameBoardArr[b].textContent &&
                 gameBoard.gameBoardArr[a].textContent === gameBoard.gameBoardArr[c].textContent
             ) {
-                gameBoard.gameBoardArr[a].setAttribute("id", "winning-combination");
-                gameBoard.gameBoardArr[b].setAttribute("id", "winning-combination");
-                gameBoard.gameBoardArr[c].setAttribute("id", "winning-combination");
+                const indices = [a, b, c];
+                colourWin(indices);
                 return result.returnResult("x-true"); 
             } else if(
                 gameBoard.gameBoardArr[a].textContent !== "" &&
@@ -80,9 +83,8 @@ const winner = (() => {
                 gameBoard.gameBoardArr[a].textContent === gameBoard.gameBoardArr[b].textContent &&
                 gameBoard.gameBoardArr[a].textContent === gameBoard.gameBoardArr[c].textContent
             ) {
-                gameBoard.gameBoardArr[a].setAttribute("id", "winning-combination");
-                gameBoard.gameBoardArr[b].setAttribute("id", "winning-combination");
-                gameBoard.gameBoardArr[c].setAttribute("id", "winning-combination");
+                const indices = [a, b, c];
+                colourWin(indices);
                 return result.returnResult("o-true");                
             } else if (play.timesRun.length == 9) {
                 return result.returnResult("tie");
