@@ -83,7 +83,7 @@ input {
     background-color: rgba(0, 255, 21, 0.548);
 }
 
-.winning-combination {
+#winning-combination {
     background-color: rgb(33, 151, 43);
     transition: .5s;
 }

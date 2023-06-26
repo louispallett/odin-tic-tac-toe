@@ -10,9 +10,15 @@ const gameBoard = (() => {
             gameBoardArr.push(gridItem);
             gridContainer.appendChild(gameBoardArr[i]);
         }
+    };
+
+    const stopPlay = () => {
+        gameBoardArr.forEach((gridItem) => {
+            gridItem.onclick = null;
+        })
     }
 
-    return {createBoard, gameBoardArr}
+    return {createBoard, gameBoardArr, stopPlay}
 })();
 
 const play = (() => {
@@ -66,9 +72,9 @@ const winner = (() => {
                 gameBoard.gameBoardArr[a].textContent === gameBoard.gameBoardArr[b].textContent &&
                 gameBoard.gameBoardArr[a].textContent === gameBoard.gameBoardArr[c].textContent
             ) {
-                gameBoard.gameBoardArr[a].classList.add("winning-combination");
-                gameBoard.gameBoardArr[b].classList.add("winning-combination");
-                gameBoard.gameBoardArr[c].classList.add("winning-combination");
+                gameBoard.gameBoardArr[a].setAttribute("id", "winning-combination");
+                gameBoard.gameBoardArr[b].setAttribute("id", "winning-combination");
+                gameBoard.gameBoardArr[c].setAttribute("id", "winning-combination");
                 return result.returnResult("x-true"); 
             } else if(
                 gameBoard.gameBoardArr[a].textContent !== "" &&
@@ -76,30 +82,17 @@ const winner = (() => {
                 gameBoard.gameBoardArr[a].textContent === gameBoard.gameBoardArr[b].textContent &&
                 gameBoard.gameBoardArr[a].textContent === gameBoard.gameBoardArr[c].textContent
             ) {
-                gameBoard.gameBoardArr[a].classList.add("winning-combination");
-                gameBoard.gameBoardArr[b].classList.add("winning-combination");
-                gameBoard.gameBoardArr[c].classList.add("winning-combination");
+                gameBoard.gameBoardArr[a].setAttribute("id", "winning-combination");
+                gameBoard.gameBoardArr[b].setAttribute("id", "winning-combination");
+                gameBoard.gameBoardArr[c].setAttribute("id", "winning-combination");
                 return result.returnResult("o-true");                
+            } else if (play.timesRun.length == 9) {
+                return result.returnResult("tie");
             }
         }
         return false;
     }
 
-    // const result = (winStatus) => {
-    //     if(winStatus === "x-true") {
-    //         console.log(`${player1.name} wins!`);
-    //         // resultAnounceWin(player1.name);
-    //         // stopPlay();
-    //     } else if (winStatus === "o-true") {
-    //         console.log(`${player2.name} wins!`);
-    //         // resultAnounceWin(player1.name);
-    //         // stopPlay();
-    //     } else if (play.timesRun.length === 9) {
-    //         console.log("Tie!");
-    //         // resultAnounceWin(player1.name);
-    //         // stopPlay();
-    //     }
-    // }
     return{checkWinner}
 })();
 
@@ -108,20 +101,50 @@ const result = (() => {
     const returnResult = (winStatus) => {
         if(winStatus === "x-true") {
             console.log(`${player1.name} wins!`);
-            // resultAnounceWin(player1.name);
-            // stopPlay();
+            win(player1.name);
+            gameBoard.stopPlay();
         } else if (winStatus === "o-true") {
             console.log(`${player2.name} wins!`);
-            // resultAnounceWin(player1.name);
-            // stopPlay();
-        } else if (play.timesRun.length === 9) {
+            win(player2.name);
+            gameBoard.stopPlay();
+        } 
+        if (winStatus === "tie") {
             console.log("Tie!");
-            // resultAnounceWin(player1.name);
-            // stopPlay();
+            tie();
+            gameBoard.stopPlay();
         }
     }
 
-    return{returnResult}
+    const playAgainBtn = document.querySelector(".playAgain")
+    const resultBox = document.querySelector(".result");
+
+    const win = (player) => {
+        resultBox.textContent = `${player} wins!`;
+        resultBox.style.display = "flex";
+        playAgainBtn.style.display = "block";
+    }
+
+    const tie = () => {
+        resultBox.textContent = "It's a tie!";
+        resultBox.style.display = "flex";
+        playAgainBtn.style.display = "block";
+    }
+
+    const playAgain = () => {
+        gameBoard.gameBoardArr.forEach((gridItem) => {
+            gridItem.innerHTML = "";
+            for(let i = 0; i < 9; i++) {
+                gridItem.onclick = function() {play.play([i], this)};
+                gridItem.classList.add(`item-${i}`);
+            }
+            gridItem.removeAttribute("id", "winning-combination");
+        });
+        play.timesRun.length = 0;
+        resultBox.style.display = "none";
+        playAgainBtn.style.display = "none";
+    }
+
+    return{returnResult, playAgain}
 })();
 
 const createPlayer = (name, marker) => {
