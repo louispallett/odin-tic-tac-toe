@@ -9,6 +9,7 @@ const gameBoard = (() => {
             gridItem.classList.add(`item-${i}`);
             gameBoardArr.push(gridItem);
             gridContainer.appendChild(gameBoardArr[i]);
+            gridContainer.style.display = "inline-grid";
         }
     };
 
