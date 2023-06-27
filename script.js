@@ -74,11 +74,13 @@ const play = (() => {
 
     const onePlay = (item, box) => {
         if(box.textContent === "") {
-            timesRun.push(null);
-            let div = document.createElement("div");
-            div.appendChild(document.createTextNode(player2.marker));
-            box.appendChild(div);
-            winner.checkWinner();
+            if(timesRun.length % 2 == 0 || timesRun.length == 0) {
+                timesRun.push(null);
+                let div = document.createElement("div");
+                div.appendChild(document.createTextNode(player2.marker));
+                box.appendChild(div);
+                winner.checkWinner();
+            }
         }
     }
 
