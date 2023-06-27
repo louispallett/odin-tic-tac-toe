@@ -13,18 +13,29 @@ const gameBoard = (() => {
         }
     };
 
+    const onePlayerCreateBoard = () => {
+        for(let i = 0; i < 9; i++) {
+            let gridItem = document.createElement("div");
+            gridItem.onclick = function() {play.onePlay([i], this)};
+            gridItem.classList.add(`item-${i}`);
+            gameBoardArr.push(gridItem);
+            gridContainer.appendChild(gameBoardArr[i]);
+            gridContainer.style.display = "inline-grid";
+        }
+    }
+
     const stopPlay = () => {
         gameBoardArr.forEach((gridItem) => {
             gridItem.onclick = null;
         })
     }
 
-    return {createBoard, gameBoardArr, stopPlay}
+    return {createBoard, gameBoardArr, onePlayerCreateBoard, stopPlay}
 })();
 
 const play = (() => {
 
-    const twoPlayerPlay = () => {
+    const twoPlayerPlayStart = () => {
         const player1Name = document.getElementById("player1Name").value;
         const player2Name = document.getElementById("player2Name").value;
         player1 = createPlayer(player1Name, "X");
@@ -32,14 +43,6 @@ const play = (() => {
         document.querySelector(".play-container").style.display = "none";
         gameBoard.createBoard();
     };
-
-    const onePlayerPlay = () => {
-        const playerName = document.getElementById("playerName").value;
-        player1 = createPlayer("The Computer", "X");
-        player2 = createPlayer(playerName, "O");
-        document.querySelector(".play-container").style.display = "none";
-        gameBoard.createBoard();
-    }
 
     const timesRun = [];
 
@@ -59,7 +62,34 @@ const play = (() => {
             winner.checkWinner();
         }
     }
-    return{onePlayerPlay, twoPlayerPlay, play, timesRun}
+
+    const onePlayerPlayStart = () => {
+        const playerName = document.getElementById("playerName").value;
+        player1 = createPlayer("The Computer", "X");
+        player2 = createPlayer(playerName, "O");
+        document.querySelector(".play-container").style.display = "none";
+        gameBoard.onePlayerCreateBoard();
+        computerMove();
+    }
+
+    const onePlay = (item, box) => {
+        if(box.textContent === "") {
+            timesRun.push(null);
+            let div = document.createElement("div");
+            div.appendChild(document.createTextNode(player2.marker));
+            box.appendChild(div);
+            winner.checkWinner();
+        }
+    }
+
+    const computerMove = () => {
+        const box = document.querySelector(".item-0")
+        let div = document.createElement("div");
+        div.appendChild(document.createTextNode(player1.marker));
+        box.appendChild(div);
+    }
+
+    return{twoPlayerPlayStart, onePlayerPlayStart, play, onePlay, timesRun}
 })();
 
 const winner = (() => {
