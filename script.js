@@ -61,7 +61,7 @@ const play = (() => {
             }
             winner.checkWinner();
         }
-    }
+    };
 
     const onePlayerPlayStart = () => {
         const playerName = document.getElementById("playerName").value;
@@ -70,7 +70,7 @@ const play = (() => {
         document.querySelector(".play-container").style.display = "none";
         gameBoard.onePlayerCreateBoard();
         computerMove();
-    }
+    };
 
     const onePlay = (item, box) => {
         if(box.textContent === "") {
@@ -80,16 +80,34 @@ const play = (() => {
                 div.appendChild(document.createTextNode(player2.marker));
                 box.appendChild(div);
                 winner.checkWinner();
+            } else {
+                computerNextMove();
             }
         }
-    }
+    };
 
     const computerMove = () => {
         const box = document.querySelector(".item-0")
         let div = document.createElement("div");
         div.appendChild(document.createTextNode(player1.marker));
         box.appendChild(div);
-    }
+    };
+
+    const computerNextMove = () => {
+        
+        const random = Math.floor(Math.random() * gameBoard.gameBoardArr.length);
+        let result = gameBoard.gameBoardArr[random];
+        console.log(result)
+        const computerPlay = () => {
+            result.textContent = "X";
+        }
+        if(result.textContent === "") {
+            computerPlay();
+        } else {
+            result = gameBoard.gameBoardArr[random];
+            computerPlay();
+        }
+    };
 
     return{twoPlayerPlayStart, onePlayerPlayStart, play, onePlay, timesRun}
 })();
